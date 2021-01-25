@@ -7,8 +7,9 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
+using ConfigEncrypt.Core;
 
-namespace ConfigEncrypt.Core
+namespace System.Configuration
 {
     public class ConfigHelper
     {
@@ -29,7 +30,13 @@ namespace ConfigEncrypt.Core
 
             var DescFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "configEncrypt.desc");
             if (!File.Exists(DescFile))
+            {
+                DescFile = Path.Combine(new DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory).Parent.FullName, "configEncrypt.desc");
+            }
+            if (!File.Exists(DescFile))
+            {
                 return;
+            }
 
             var bytes = File.ReadAllBytes(DescFile);
 
@@ -63,7 +70,8 @@ namespace ConfigEncrypt.Core
             {
                 foreach (XmlNode an in aS.ChildNodes)
                 {
-                    AppSettings.Add(an.Attributes["key"].Value, an.Attributes["value"].Value);
+                    if(an.NodeType!= XmlNodeType.Comment)
+                        AppSettings.Add(an.Attributes["key"].Value, an.Attributes["value"].Value);
                 }
             }
         }

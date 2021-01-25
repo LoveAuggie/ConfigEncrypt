@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="DesHelper.cs" />
+    <Compile Include="MD5Extend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SM4.cs" />
     <Compile Include="SM4Utils.cs" />

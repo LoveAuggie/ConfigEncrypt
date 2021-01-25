@@ -16,6 +16,8 @@ namespace ConfigEncrypt.Core
         {
             if (string.IsNullOrEmpty(key)) key = secretKey;
             if (string.IsNullOrEmpty(plainText)) return "";
+            key = key.ToMD5().Substring(0, 16);
+
             SM4_Context ctx = new SM4_Context();
             ctx.isPadding = true;
             ctx.mode = SM4.SM4_ENCRYPT;
@@ -41,6 +43,7 @@ namespace ConfigEncrypt.Core
         {
             if (string.IsNullOrEmpty(key)) key = secretKey;
             if (string.IsNullOrEmpty(cipherText)) return "";
+            key = key.ToMD5().Substring(0, 16);
 
             SM4_Context ctx = new SM4_Context();
             ctx.isPadding = true;

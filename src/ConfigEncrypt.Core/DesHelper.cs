@@ -27,6 +27,8 @@ namespace ConfigEncrypt.Core
                 if (string.IsNullOrEmpty(encryptString))
                     return "";
 
+                Key = Key.ToMD5().Substring(0, 8);
+
                 byte[] keyBytes = Encoding.UTF8.GetBytes(Key);
                 byte[] keyIV = keyBytes;
                 byte[] inputByteArray = Encoding.UTF8.GetBytes(encryptString);
@@ -62,6 +64,8 @@ namespace ConfigEncrypt.Core
                 if (string.IsNullOrEmpty(Key)) Key = S_KEY;
                 if (string.IsNullOrEmpty(decryptString))
                     return "";
+                // 实际使用的Key，为Md5之后的数据
+                Key = Key.ToMD5().Substring(0, 8);
 
                 byte[] keyBytes = Encoding.UTF8.GetBytes(Key);
                 byte[] keyIV = keyBytes;

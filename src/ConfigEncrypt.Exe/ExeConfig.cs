@@ -23,11 +23,13 @@ namespace ConfigEncrypt.Exe
 
         internal string Directory { get; set; }
 
-        internal string[] Exes { get; set; }
+        internal string Exe { get; set; }
 
         internal EnType EnType { get; set; } = EnType.SM4;
 
         internal string EnKey { get; set; }
+
+        internal string Enviroment { get; set; }
 
         internal static ExeConfig Load(string[] args)
         {
@@ -65,7 +67,11 @@ namespace ConfigEncrypt.Exe
                             i++;
                             break;
                         case "-f":
-                            config.Exes = aList[i + 1].Split(',');
+                            config.Exe = aList[i + 1];
+                            i++;
+                            break;
+                        case "-e":
+                            config.Enviroment = aList[i + 1];
                             i++;
                             break;
                         default:
